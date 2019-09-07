@@ -1,8 +1,9 @@
 window.onload = function(){
 
-  let firstvalue
-  let selectedOperator
-  let secondValue
+  let firstValue;
+  let secondValue;
+  let selectedOperator = "";
+  let memoryValue = null;
 
   const display = document.getElementById('display')
   const btnOne = document.getElementById('btnOne')
@@ -17,10 +18,11 @@ window.onload = function(){
   const btnZero = document.getElementById('btnZero')
   const btnDecimal = document.getElementById('btnDecimal')
   const btnC = document.getElementById('btnC')
+  const btnMadd = document.getElementById('btnMadd')
+  const btnMsubstract = document.getElementById('btnMsubstract')
+  const btnMC = document.getElementById('btnMC')
 
   //console.log(btnOne)
-
-
 
   const numberOnClick = function(event){
     display.innerText += event.target.textContent;
@@ -41,10 +43,28 @@ window.onload = function(){
 
   btnC.onclick = function () {
     display.innerText = "";
+    selectedOperator = "";
+//    firstValue = 0;
+//    secondValue = 0;
+  }
+
+  btnMadd.onclick = function (event) {
+    memoryValue += parseFloat(display.innerText)
+    display.innerText = memoryValue
+  }
+
+  btnMsubstract.onclick = function (event) {
+    memoryValue -= parseFloat(display.innerText)
+    display.innerText = memoryValue
+  }
+
+  btnMC.onclick = function (event) {
+    memoryValue = null;
+    display.innerText = memoryValue
   }
 
   const operatorFunction = function (event) {
-    firstvalue = parseFloat(display.innerText)
+    firstValue = parseFloat(display.innerText)
     display.innerText = ""
     selectedOperator = event.target.textContent
   }
@@ -59,19 +79,21 @@ window.onload = function(){
     let result
     switch (selectedOperator) {
       case '+':
-        result = firstvalue + secondValue
+        result = firstValue + secondValue
         break;
       case '-':
-        result = firstvalue - secondValue
+        result = firstValue - secondValue
         break;
       case '*':
-        result = firstvalue * secondValue
+        result = firstValue * secondValue
         break;
       case '/':
-        result = firstvalue / secondValue
+        result = firstValue / secondValue
         break;
+      case '':
+          result = display.innerText
+          break;
       default:
-
     }
     display.innerText = result;
   }
