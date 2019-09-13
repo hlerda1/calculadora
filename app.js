@@ -28,12 +28,13 @@ window.onload = function(){
   const numberOnClick = function(event){
     if(statusAction == 1){
       display.innerText = "";
+      statusAction = 0;
       display.innerText += event.target.textContent;
     }
     else {
       display.innerText += event.target.textContent;
       //console.log(event.target.textContent);
-    }    
+    }
   }
 
   btnOne.onclick = numberOnClick;
