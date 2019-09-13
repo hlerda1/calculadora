@@ -4,6 +4,7 @@ window.onload = function(){
   let secondValue;
   let selectedOperator = "";
   let memoryValue = null;
+  let statusAction = 0;
 
   const display = document.getElementById('display')
   const btnOne = document.getElementById('btnOne')
@@ -25,8 +26,14 @@ window.onload = function(){
   //console.log(btnOne)
 
   const numberOnClick = function(event){
-    display.innerText += event.target.textContent;
-    //console.log(event.target.textContent);
+    if(statusAction == 1){
+      display.innerText = "";
+      display.innerText += event.target.textContent;
+    }
+    else {
+      display.innerText += event.target.textContent;
+      //console.log(event.target.textContent);
+    }    
   }
 
   btnOne.onclick = numberOnClick;
@@ -49,13 +56,26 @@ window.onload = function(){
   }
 
   btnMadd.onclick = function (event) {
-    memoryValue += parseFloat(display.innerText)
-    display.innerText = memoryValue
+    if(display.innerText == "" || display.innerText == "ERROR")
+    {
+      display.innerText = "ERROR";
+    }
+    else{
+      memoryValue += parseFloat(display.innerText);
+      display.innerText = memoryValue;
+    }
+
   }
 
   btnMsubstract.onclick = function (event) {
-    memoryValue -= parseFloat(display.innerText)
-    display.innerText = memoryValue
+    if(display.innerText == "" || display.innerText == "ERROR")
+    {
+      display.innerText = "ERROR";
+    }
+    else{
+      memoryValue -= parseFloat(display.innerText)
+      display.innerText = memoryValue
+    }
   }
 
   btnMC.onclick = function (event) {
@@ -96,5 +116,6 @@ window.onload = function(){
       default:
     }
     display.innerText = result;
+    statusAction = 1;
   }
 }
