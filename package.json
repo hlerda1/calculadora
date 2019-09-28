@@ -1,0 +1,29 @@
+{
+  "name": "calculadora",
+  "version": "1.0.0",
+  "description": "Simple calculadora online",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hlerda1/calculadora.git"
+  },
+  "author": "Horacio Lerda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hlerda1/calculadora/issues"
+  },
+  "homepage": "https://github.com/hlerda1/calculadora#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}
