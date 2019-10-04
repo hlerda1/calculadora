@@ -20,34 +20,34 @@ mongoose.connect(url, {}, (error) => {
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(cors())
-app.get('/getresult/:firstValue/:secondValue/:selectedOperator', function (req, res) {
-  //console.log(req.params)
-  const firstValue = parseFloat(req.params.firstValue)
-  const secondValue = parseFloat(req.params.secondValue)
-
-  //let result
-  switch (req.params.selectedOperator) {
-    case '*':
-      result = firstValue * secondValue
-      break
-    case '+':
-      result = firstValue + secondValue
-      break
-    case '-':
-      result = firstValue - secondValue
-      break
-    case '/':
-      result = firstValue / secondValue
-      break
-    case 'M+':
-    case 'M-':
-      result = mem
-      break
-    default:
-      break
-  }
-  res.send({ result: result })
-})
+// app.get('/getresult/:firstValue/:secondValue/:selectedOperator', function (req, res) {
+//   //console.log(req.params)
+//   const firstValue = parseFloat(req.params.firstValue)
+//   const secondValue = parseFloat(req.params.secondValue)
+//
+//   //let result
+//   switch (req.params.selectedOperator) {
+//     case '*':
+//       result = firstValue * secondValue
+//       break
+//     case '+':
+//       result = firstValue + secondValue
+//       break
+//     case '-':
+//       result = firstValue - secondValue
+//       break
+//     case '/':
+//       result = firstValue / secondValue
+//       break
+//     case 'M+':
+//     case 'M-':
+//       result = mem
+//       break
+//     default:
+//       break
+//   }
+//   res.send({ result: result })
+// })
 
 //PATH para suma
 app.get('/sum/:firstValue/:secondValue', function (req, res) {
@@ -72,24 +72,74 @@ app.get('/sum/:firstValue/:secondValue', function (req, res) {
 app.get('/sub/:firstValue/:secondValue', function (req, res) {
   const firstValue = parseFloat(req.params.firstValue)
   const secondValue = parseFloat(req.params.secondValue)
+  result = firstValue - secondValue
 
-  res.send({ result: result = firstValue - secondValue})
+  const newResult = new Result({value: result})
+  newResult.save((error, result) => {
+    if(error)
+    {
+      console.log(error);
+    } else {
+      console.log(result);
+    }
+  })
+
+  res.send({ result: result})
 })
 
 //PATH para multiplicacion
 app.get('/mult/:firstValue/:secondValue', function (req, res) {
   const firstValue = parseFloat(req.params.firstValue)
   const secondValue = parseFloat(req.params.secondValue)
+  result = firstValue * secondValue
 
-  res.send({ result: result = firstValue * secondValue})
+  const newResult = new Result({value: result})
+  newResult.save((error, result) => {
+    if(error)
+    {
+      console.log(error);
+    } else {
+      console.log(result);
+    }
+  })
+
+  res.send({ result: result})
 })
 
 //PATH para division
 app.get('/div/:firstValue/:secondValue', function (req, res) {
   const firstValue = parseFloat(req.params.firstValue)
   const secondValue = parseFloat(req.params.secondValue)
+  result = firstValue / secondValue
 
-  res.send({ result: result = firstValue / secondValue})
+  const newResult = new Result({value: result})
+  newResult.save((error, result) => {
+    if(error)
+    {
+      console.log(error);
+    } else {
+      console.log(result);
+    }
+  })
+
+  res.send({ result: result})
+})
+
+//PATH para traer el ultimo valor
+app.get('/getresult', function (req, res) {
+  //result = firstValue / secondValue
+
+  const lastResult = new Result({value: result})
+  lastResult.findOne({}, function(error, result) {
+    if(error)
+    {
+      console.log(error);
+    } else {
+      console.log(result);
+    }
+  })
+
+  //res.send({ result: result})
 })
 
 //localhost por defecto
